@@ -1,3 +1,14 @@
+function checkSize(str) {
+    console.log(str)
+    var num = parseInt(str);
+
+    if (num > 9999999999999) 
+        return num.toExponential();
+    else {
+        return str;
+    }
+}
+
 function updateRes(str) {
     document.getElementById('res').innerText = str;
 }
@@ -99,12 +110,10 @@ function calculate(result) {
         for (var i = 0; i < mult.length; i++) {
             if (mult[i + 1] === '+') {
                 mult = calcAdd(mult, i);
-                console.log(mult);
                 break
             }
             if (mult[i + 1] === '-') {
                 mult = calcSous(mult, i);
-                console.log(mult);
                 break
             }
         }
@@ -115,11 +124,13 @@ function calculate(result) {
         updateRes('Error');
     else {
         if ((mult[0] % 1) === 0)
-            updateRes(mult);
+            updateRes(checkSize(String(mult)));
         else
-            updateRes(parseFloat(mult).toFixed(14));
+            updateRes(checkSize(String(parseFloat(mult).toFixed(14))));
 
     }
+
+    res = '0';
 }
 
 function splitRes() {
@@ -141,10 +152,6 @@ function splitRes() {
     }
 
     temp !== '' ? result.push(temp) : null;
-
-    console.log("-------------------------RESULT-------------------------")
-    console.log(result)
-    console.log("-------------------------RESULT-------------------------")
 
     calculate(result)
 }
@@ -168,6 +175,74 @@ document.getElementById('-').addEventListener('click', () => {checkBefore('-')})
 document.getElementById('/').addEventListener('click', () => {checkBefore('/')})
 document.getElementById('x').addEventListener('click', () => {checkBefore('*')})
 document.getElementById('.').addEventListener('click', () => {checkDot()})
+window.addEventListener("keydown", function(event) {
+    if (event.defaultPrevented) {
+        return
+    }
+
+    switch (event.key) {
+        case "0":
+            addNumber('0');
+            break;
+        case "1":
+            addNumber('1')
+            break;
+        case "2":
+            addNumber('2')
+            break;
+        case "3":
+            addNumber('3')
+            break;
+        case "4":
+            addNumber('4')
+            break;
+        case "5":
+            addNumber('5')
+            break;
+        case "6":
+            addNumber('6')
+            break;
+        case "7":
+            addNumber('7')
+            break;
+        case "8":
+            addNumber('8')
+            break;
+        case "9":
+            addNumber('9')
+            break;
+        case "+":
+            checkBefore('+')
+            break;
+        case "-":
+            checkBefore('-')
+            break;
+        case "/":
+            checkBefore('/')
+            break;
+        case "*":
+            checkBefore('*')
+            break;
+        case ".":
+            checkDot()
+            break;
+        case "=":
+            splitRes()
+            break;
+        case "Enter":
+            splitRes();
+            break;
+        case "Backspace":
+            res = res.slice(0, res.length - 1)
+            res === '' ? updateRes('0') : updateRes(res)
+            break;
+        case "Clear":
+            res = '';
+            updateRes('0');
+        default:
+            return;
+    }
+})
 
 
 document.getElementById('=').addEventListener('click', () => {

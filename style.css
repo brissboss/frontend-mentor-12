@@ -164,6 +164,19 @@ main {
     font-size: 40px;
 
     background-color: var(--screen-bg);
+
+    /* border: var(--border); */
+}
+
+.result h1 {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+
+    overflow:hidden;
+    text-overflow: ellipsis;
+    
+    width: 100%; 
 }
 
 .calc {

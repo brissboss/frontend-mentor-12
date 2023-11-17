@@ -1,10 +1,18 @@
+function updateColor(light, classN) {
+    var elements = document.getElementsByClassName(classN)
+
+    for (var i = 0; i < elements.length; i++) {
+        elements[i].style.color = light ? "var(--text-light)" : "var(--text-dark)";
+    }
+}
+
 function updateCSSVariables(newValues) {
     for (const key in newValues) {
         document.documentElement.style.setProperty(key, newValues[key]);
     }
 }
 
-document.getElementById('select-1').addEventListener('click', function() {
+function themeOne() {
     document.getElementById('toggle-round').style = "left: 9px";
     updateCSSVariables({
         '--main-bg': 'hsl(222, 26%, 31%)',
@@ -23,8 +31,13 @@ document.getElementById('select-1').addEventListener('click', function() {
         '--text-light': 'hsl(221, 14%, 31%)',
         '--border': '2px solid green'
     });
-});
-document.getElementById('select-2').addEventListener('click', function() {
+
+    updateColor(true, "number")
+    updateColor(false, "text")
+    updateColor(false, "equal")
+}
+
+function themeTwo() {
     document.getElementById('toggle-round').style = "left: 31px";
     updateCSSVariables({
         '--main-bg': 'hsl(0, 0%, 90%)',
@@ -43,8 +56,13 @@ document.getElementById('select-2').addEventListener('click', function() {
         '--text-light': 'hsl(0, 0%, 100%)',
         '--border': '2px solid red'
     });    
-});
-document.getElementById('select-3').addEventListener('click', function() {
+ 
+    updateColor(false, "number")
+    updateColor(true, "text")
+    updateColor(true, "equal")
+}
+
+function themeThree() {
     document.getElementById('toggle-round').style = "left: 55px";
     updateCSSVariables({
         '--main-bg': 'hsl(268, 75%, 9%)',
@@ -63,5 +81,12 @@ document.getElementById('select-3').addEventListener('click', function() {
         '--text-light': 'hsl(0, 0%, 100%)',
         '--border': '2px solid blue'
     });
-    
-});
+
+    updateColor(false, "number")
+    updateColor(true, "text")
+    updateColor(true, "equal")
+}
+
+document.getElementById('select-1').addEventListener('click', themeOne);
+document.getElementById('select-2').addEventListener('click', themeTwo);
+document.getElementById('select-3').addEventListener('click', themeThree);
